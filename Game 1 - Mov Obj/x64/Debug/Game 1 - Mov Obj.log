@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\Kevin Schmitz\Documents\GitHub x Visual CPP\Learning\Game 1 - Mov Obj\main.cpp(53): warning C4244: "Argument": Konvertierung von "time_t" in "unsigned int", möglicher Datenverlust
+C:\Users\Kevin Schmitz\Documents\GitHub x Visual CPP\Learning\Game 1 - Mov Obj\main.cpp(75): warning C4244: "Argument": Konvertierung von "time_t" in "unsigned int", möglicher Datenverlust
+  Game 1 - Mov Obj.vcxproj -> C:\Users\Kevin Schmitz\Documents\GitHub x Visual CPP\Learning\x64\Debug\Game 1 - Mov Obj.exe
