@@ -7,6 +7,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game 1 - Mov Obj", "Game 1 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Menü 1 - Array Menü", "Menü 1 - Array Menü\Menü 1 - Array Menü.vcxproj", "{274A2AFF-9E33-42D9-9B70-2B181D603BA6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Map Drawing 2met", "2D Arrayx2 Moving\2D Arrayx2 Moving.vcxproj", "{CA730E84-4101-4A62-A8C8-C96C47A42472}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Testing", "Testing\Testing.vcxproj", "{3C325E5E-A5F5-4737-BF2A-BCF24C305B4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +35,22 @@ Global
 		{274A2AFF-9E33-42D9-9B70-2B181D603BA6}.Release|x64.Build.0 = Release|x64
 		{274A2AFF-9E33-42D9-9B70-2B181D603BA6}.Release|x86.ActiveCfg = Release|Win32
 		{274A2AFF-9E33-42D9-9B70-2B181D603BA6}.Release|x86.Build.0 = Release|Win32
+		{CA730E84-4101-4A62-A8C8-C96C47A42472}.Debug|x64.ActiveCfg = Debug|x64
+		{CA730E84-4101-4A62-A8C8-C96C47A42472}.Debug|x64.Build.0 = Debug|x64
+		{CA730E84-4101-4A62-A8C8-C96C47A42472}.Debug|x86.ActiveCfg = Debug|Win32
+		{CA730E84-4101-4A62-A8C8-C96C47A42472}.Debug|x86.Build.0 = Debug|Win32
+		{CA730E84-4101-4A62-A8C8-C96C47A42472}.Release|x64.ActiveCfg = Release|x64
+		{CA730E84-4101-4A62-A8C8-C96C47A42472}.Release|x64.Build.0 = Release|x64
+		{CA730E84-4101-4A62-A8C8-C96C47A42472}.Release|x86.ActiveCfg = Release|Win32
+		{CA730E84-4101-4A62-A8C8-C96C47A42472}.Release|x86.Build.0 = Release|Win32
+		{3C325E5E-A5F5-4737-BF2A-BCF24C305B4D}.Debug|x64.ActiveCfg = Debug|x64
+		{3C325E5E-A5F5-4737-BF2A-BCF24C305B4D}.Debug|x64.Build.0 = Debug|x64
+		{3C325E5E-A5F5-4737-BF2A-BCF24C305B4D}.Debug|x86.ActiveCfg = Debug|Win32
+		{3C325E5E-A5F5-4737-BF2A-BCF24C305B4D}.Debug|x86.Build.0 = Debug|Win32
+		{3C325E5E-A5F5-4737-BF2A-BCF24C305B4D}.Release|x64.ActiveCfg = Release|x64
+		{3C325E5E-A5F5-4737-BF2A-BCF24C305B4D}.Release|x64.Build.0 = Release|x64
+		{3C325E5E-A5F5-4737-BF2A-BCF24C305B4D}.Release|x86.ActiveCfg = Release|Win32
+		{3C325E5E-A5F5-4737-BF2A-BCF24C305B4D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
