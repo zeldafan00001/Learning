@@ -5,10 +5,10 @@
 
 //   map[y][x] 
 char map[13][30] = {"#############################",
-					"#                           #", 
-					"# P                         #",
-					"#                           #",
-					"#            X              #",
+					"#    #                     X#", 
+					"# P      #X                 #",
+					"#    #                     X#",
+					"#########################   #",
 					"#                           #",
 					"#                           #",
 					"#                           #",
@@ -28,9 +28,10 @@ int direction[4];
 
 bool running = false;
 
+
 void draw() {
 	system("cls");
-	for (int display = 0; display < 14; display++) {
+	for (int display = 0; display < 13; display++) {
 		printf("%s\n", map[display]);
 	}
 	printf("CORDS : Y:%d | X:%d\n\nSteuerung :\n", y + 1, x + 1);
@@ -109,25 +110,25 @@ void Input()
 				}
 			}
 			break;
-			break;
 		case 'x':
 			running = true;
 			break;
 		}
 	}
 }
-
 void setEnemCords()
 {
-	cordY[0] = 4; cordX[0] = 13;
-
-	direction[0] = 2;
+	cordY[0] = 1; cordX[0] = 27;
+	cordY[1] = 2; cordX[1] = 10;
+	cordY[2] = 3; cordX[2] = 27;
+	direction[0] = 4;
+	direction[1] = 3;
+	direction[2] = 4;
 
 }
-
 void enemMove()
 {
-	for (s = 0; s < 1; s++)
+	for (s = 0; s < 4; s++)
 	{
 		tempY = cordY[s];	tempX = cordX[s];
 		if (direction[s] == 1) // Hoch laufen
@@ -174,7 +175,53 @@ void enemMove()
 			{
 				direction[s] = 1;
 			}
-		} // Runter Bewegen
+		} // RUNTER Bewegen
+
+		if (direction[s] == 3) // RECHTS laufen
+		{
+			if (map[tempY][tempX+1] == 'P')
+			{
+				map[tempY][tempX] = ' ';
+				tempX++;
+				map[tempY][tempX] = 'X';
+				running = true;
+			}
+			if (map[tempY][tempX+1] != '#' && map[tempY][tempX+1] != 'P')
+			{
+				map[tempY][tempX] = ' ';
+				tempX++;
+				map[tempY][tempX] = 'X';
+				cordY[s] = tempY;
+				cordX[s] = tempX;
+			}
+			else 
+			{
+				direction[s] = 4;
+			}
+		} // RECHTS Bewegen
+
+		if (direction[s] == 4) // LINKS laufen
+		{
+			if (map[tempY][tempX-1] == 'P')
+			{
+				map[tempY][tempX] = ' ';
+				tempY--;
+				map[tempY][tempX] = 'X';
+				running = true;
+			}
+			if (map[tempY][tempX-1] != '#' && map[tempY][tempX-1] != 'P')
+			{
+				map[tempY][tempX] = ' ';
+				tempX--;
+				map[tempY][tempX] = 'X';
+				cordY[s] = tempY;
+				cordX[s] = tempX;
+			}
+			else 
+			{
+				direction[s] = 3;
+			}
+		} // LINKS Bewegen
 
 	}
 }
@@ -189,5 +236,7 @@ int main()
 		Sleep(50);
 	}
 
+
+	return 0;
 
 }
