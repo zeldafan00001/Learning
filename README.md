@@ -5,6 +5,8 @@
 
 [x] Erstelle ein besseres Menü.
 
+[x] Erstelle Gegner die eine Route "Laufen".
+
 [ ] Verbesserung des RNG.
 
 [ ] Ein Spiel mit einem Eingebauten Menü.
