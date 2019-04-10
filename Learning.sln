@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Struct Testing", "Struct Te
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MazeGame", "MazeGame\MazeGame.vcxproj", "{97DAC3BD-4270-4857-96F9-A7AE70415133}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hangman", "Hangman\Hangman.vcxproj", "{AB1193D7-F761-45E3-9FD8-35DA4DB82255}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -71,6 +73,14 @@ Global
 		{97DAC3BD-4270-4857-96F9-A7AE70415133}.Release|x64.Build.0 = Release|x64
 		{97DAC3BD-4270-4857-96F9-A7AE70415133}.Release|x86.ActiveCfg = Release|Win32
 		{97DAC3BD-4270-4857-96F9-A7AE70415133}.Release|x86.Build.0 = Release|Win32
+		{AB1193D7-F761-45E3-9FD8-35DA4DB82255}.Debug|x64.ActiveCfg = Debug|x64
+		{AB1193D7-F761-45E3-9FD8-35DA4DB82255}.Debug|x64.Build.0 = Debug|x64
+		{AB1193D7-F761-45E3-9FD8-35DA4DB82255}.Debug|x86.ActiveCfg = Debug|Win32
+		{AB1193D7-F761-45E3-9FD8-35DA4DB82255}.Debug|x86.Build.0 = Debug|Win32
+		{AB1193D7-F761-45E3-9FD8-35DA4DB82255}.Release|x64.ActiveCfg = Release|x64
+		{AB1193D7-F761-45E3-9FD8-35DA4DB82255}.Release|x64.Build.0 = Release|x64
+		{AB1193D7-F761-45E3-9FD8-35DA4DB82255}.Release|x86.ActiveCfg = Release|Win32
+		{AB1193D7-F761-45E3-9FD8-35DA4DB82255}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

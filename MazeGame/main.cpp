@@ -1,40 +1,67 @@
 #include <windows.h>
 #include <time.h>
+#include <iostream>
 #include <stdio.h>
 #include <conio.h>
+using namespace std;
+HANDLE  hConsole;
 
-//   map[y][x] 
-char map[13][30] = {"#############################",
-					"#    #                     X#", 
-					"# P      #X                 #",
-					"#    #                     X#",
+//   map[y][x]
+char map[13][30] = { "#############################",
+					"#   #                      X#",
+					"# P    #X      #R#X         #",
+					"#   #                      X#",
 					"#########################   #",
 					"#                           #",
 					"#                           #",
 					"#                           #",
 					"#                           #",
 					"#                           #",
+					"# Z                         #",
 					"#                           #",
-					"#                           #",
-					"#############################"};
+					"#############################" };
 // Spieler
 int y = 2;
 int x = 2;
 // Gegner
-int cordY[4], tempY;
-int cordX[4], tempX;
+int cordY[10], tempY;
+int cordX[10], tempX;
 int s;
-int direction[4];
+int direction[10];
 
 bool running = false;
-
+int punkte = 500;
+bool winb = false;
 
 void draw() {
 	system("cls");
-	for (int display = 0; display < 13; display++) {
-		printf("%s\n", map[display]);
+	//for (int display = 0; display < 13; display++) {
+	//	printf("%s\n", map[display]);
+	//}
+	for (int i = 0; i < 13; i++)
+	{
+		for (int j = 0; j < 30; j++) {
+			if (map[i][j] == 'X')
+			{
+				SetConsoleTextAttribute(hConsole, 12);
+				cout << map[i][j];
+				SetConsoleTextAttribute(hConsole, 15);
+			}
+			if (map[i][j] == 'R')
+			{
+				SetConsoleTextAttribute(hConsole, 10);
+				cout << map[i][j];
+				SetConsoleTextAttribute(hConsole, 15);
+			}
+			if (map[i][j] != 'R' && map[i][j] != 'X')
+			{
+				cout << map[i][j];
+			}
+		}
+		cout << endl;
 	}
-	printf("CORDS : Y:%d | X:%d\n\nSteuerung :\n", y + 1, x + 1);
+	
+	printf("CORDS : Y:%d | X:%d\nPUNKTE : %d \nSteuerung :\n", y + 1, x + 1, punkte);
 	printf("W - HOCH  | A - RUNTER\n");
 	printf("S - LINKS | D RECHTS\n");
 	printf("X = EXIT");
@@ -50,12 +77,21 @@ void Input()
 			if (map[y][x - 1] != '#')
 			{
 				if (map[y][x - 1] == 'X') {
-					map[y][x] = ' ';
-					x--;
-					map[y][x] = 'X';
 					running = true;
 				}
 				if (map[y][x - 1] == ' ') {
+					punkte -= 10;
+					map[y][x] = ' ';
+					x--;
+					map[y][x] = 'P';
+				}
+				if (map[y][x - 1] == 'Z') { // for Z
+					winb = true;
+					running = true;
+				}
+				if (map[y][x - 1] == 'R') // POINTS
+				{
+					punkte += 50;
 					map[y][x] = ' ';
 					x--;
 					map[y][x] = 'P';
@@ -63,15 +99,24 @@ void Input()
 			}
 			break;
 		case 'd':
-			if (map[y][x+1] != '#')
+			if (map[y][x + 1] != '#')
 			{
-				if (map[y][x+1] == 'X') {
-					map[y][x] = ' ';
-					x++;
-					map[y][x] = 'X';
+				if (map[y][x + 1] == 'X') {
 					running = true;
 				}
-				if (map[y][x+1] == ' ') {
+				if (map[y][x + 1] == ' ') {
+					punkte -= 10;
+					map[y][x] = ' ';
+					x++;
+					map[y][x] = 'P';
+				}
+				if (map[y][x+1] == 'Z') { // for Z
+					winb = true;
+					running = true;
+				}
+				if (map[y][x + 1] == 'R') // POINTS
+				{
+					punkte += 50;
 					map[y][x] = ' ';
 					x++;
 					map[y][x] = 'P';
@@ -79,15 +124,24 @@ void Input()
 			}
 			break;
 		case 'w':
-			if (map[y-1][x] != '#')
+			if (map[y - 1][x] != '#')
 			{
-				if (map[y-1][x] == 'X') {
+				if (map[y - 1][x] == 'X') {
+					running = true;
+				}
+				if (map[y - 1][x] == ' ') {
+					punkte -= 10;
 					map[y][x] = ' ';
 					y--;
-					map[y][x] = 'X';
+					map[y][x] = 'P';
+				}
+				if (map[y - 1][x] == 'Z') { // for Z
+					winb = true;
 					running = true;
-				}		
-				if (map[y-1][x] == ' ') {
+				}
+				if (map[y-1][x] == 'R') // POINTS
+				{
+					punkte += 50;
 					map[y][x] = ' ';
 					y--;
 					map[y][x] = 'P';
@@ -97,13 +151,22 @@ void Input()
 		case 's':
 			if (map[y + 1][x] != '#')
 			{
-				if (map[y + 1][x] == 'X') {
-					map[y][x] = ' ';
-					y++;
-					map[y][x] = 'X';
+				if (map[y + 1][x] == 'X') { // Enem
 					running = true;
 				}
-				if (map[y + 1][x] == ' ') {
+				if (map[y + 1][x] == ' ') { // Nor MOV
+					punkte -= 10;
+					map[y][x] = ' ';
+					y++;
+					map[y][x] = 'P';
+				}
+				if (map[y + 1][x] == 'Z') { // for Z
+					winb = true;
+					running = true;
+				}
+				if (map[y+1][x] == 'R') // POINTS
+				{
+					punkte += 50;
 					map[y][x] = ' ';
 					y++;
 					map[y][x] = 'P';
@@ -119,21 +182,22 @@ void Input()
 void setEnemCords()
 {
 	cordY[0] = 1; cordX[0] = 27;
-	cordY[1] = 2; cordX[1] = 10;
+	cordY[1] = 2; cordX[1] = 8;
 	cordY[2] = 3; cordX[2] = 27;
+	cordY[3] = 2; cordX[3] = 18;
 	direction[0] = 4;
 	direction[1] = 3;
 	direction[2] = 4;
-
+	direction[3] = 3;
 }
 void enemMove()
 {
-	for (s = 0; s < 4; s++)
+	for (s = 0; s < 5; s++)
 	{
 		tempY = cordY[s];	tempX = cordX[s];
 		if (direction[s] == 1) // Hoch laufen
 		{
-			if (map[tempY-1][tempX] == 'P')
+			if (map[tempY - 1][tempX] == 'P')
 			{
 				map[tempY][tempX] = ' ';
 				tempY--;
@@ -148,7 +212,7 @@ void enemMove()
 				cordY[s] = tempY;
 				cordX[s] = tempX;
 			}
-			else //(map[tempY - 1][tempX] == '#') 
+			else //(map[tempY - 1][tempX] == '#')
 			{
 				direction[s] = 2;
 			}
@@ -156,7 +220,7 @@ void enemMove()
 
 		if (direction[s] == 2) // Runter laufen
 		{
-			if (map[tempY+1][tempX] == 'P')
+			if (map[tempY + 1][tempX] == 'P')
 			{
 				map[tempY][tempX] = ' ';
 				tempY--;
@@ -179,14 +243,14 @@ void enemMove()
 
 		if (direction[s] == 3) // RECHTS laufen
 		{
-			if (map[tempY][tempX+1] == 'P')
+			if (map[tempY][tempX + 1] == 'P')
 			{
 				map[tempY][tempX] = ' ';
 				tempX++;
 				map[tempY][tempX] = 'X';
 				running = true;
 			}
-			if (map[tempY][tempX+1] != '#' && map[tempY][tempX+1] != 'P')
+			if (map[tempY][tempX + 1] != '#' && map[tempY][tempX + 1] != 'P')
 			{
 				map[tempY][tempX] = ' ';
 				tempX++;
@@ -194,7 +258,7 @@ void enemMove()
 				cordY[s] = tempY;
 				cordX[s] = tempX;
 			}
-			else 
+			else
 			{
 				direction[s] = 4;
 			}
@@ -202,14 +266,14 @@ void enemMove()
 
 		if (direction[s] == 4) // LINKS laufen
 		{
-			if (map[tempY][tempX-1] == 'P')
+			if (map[tempY][tempX - 1] == 'P')
 			{
 				map[tempY][tempX] = ' ';
 				tempY--;
 				map[tempY][tempX] = 'X';
 				running = true;
 			}
-			if (map[tempY][tempX-1] != '#' && map[tempY][tempX-1] != 'P')
+			if (map[tempY][tempX - 1] != '#' && map[tempY][tempX - 1] != 'P')
 			{
 				map[tempY][tempX] = ' ';
 				tempX--;
@@ -217,16 +281,28 @@ void enemMove()
 				cordY[s] = tempY;
 				cordX[s] = tempX;
 			}
-			else 
+			else
 			{
 				direction[s] = 3;
 			}
 		} // LINKS Bewegen
-
+	}
+}
+void win() {
+	if (winb == true)
+	{
+		system("cls");
+		printf("Gewonnen! mit %d Punkten!", punkte);
+	}
+	else if (winb == false)
+	{
+		system("cls");
+		printf("Verloren!");
 	}
 }
 int main()
 {
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	setEnemCords();
 	while (!running)
 	{
@@ -235,8 +311,7 @@ int main()
 		enemMove();
 		Sleep(50);
 	}
-
-
+	win();
+	getchar();
 	return 0;
-
 }

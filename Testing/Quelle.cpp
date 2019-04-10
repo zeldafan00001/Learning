@@ -22,6 +22,7 @@ int direction[4];
 
 bool running = false;
 
+
 void setEnemCords()
 {
 	cordY[0] = 1; cordX[0] = 1;	
