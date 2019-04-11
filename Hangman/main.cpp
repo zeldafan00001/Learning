@@ -4,6 +4,7 @@
 #include <conio.h>
 #include <string.h>
 #include <ctype.h>
+// Rechtsklick auf 3D Wurfel > Eigenschaften > Linker > Eingabe > zusätzliche Abhängikeit > Bearbeiten > winmm.lib Einfügen
 //[z][y][x]
 bool running = false;
 char SN[1][15];
@@ -18,14 +19,14 @@ char man[11][10][15] =
 {"   []______  ","    |     |  ","    |     O  ","    |    /|\x5c ","    |     |  ","    |        ","    |        ","#############" },
 {"   []______  ","    |     |  ","    |     O  ","    |    /|\x5c ","    |     |  ","    |    / \x5c ","    |        ","#############" } };
 
-int lange = 0;
-int count = 0;
+int lange = 0, count = 0, win, aw, versu;
 char versuche[40];
 char solve[40];
 char rate[40];
-int i, k = 0;
+int i, k = 0, fail = 0;
 char inputU[40];
-int win;
+char temp[40];
+
 
 void name()
 {
@@ -42,7 +43,6 @@ void hangman()
 	{
 		printf("%s\n", man[k][i]);
 	} // Hangman Draw
-	k++;
 	//if (k == 9) { exit(-1); }
 }
 
@@ -60,51 +60,94 @@ void wortEingabe()
 	}
 	solve[i] = '\0';
 	rate[i] = '\0';
+	
+}
+
+void game()
+{
+	
+	while (!running)
+	{
+		system("cls");
+		printf("Wollen sie ein Wort oder ein Buchstaben eingeben? \n[ 1 Buchstabe | 2 Wort ]\n");
+		printf("%s\n", solve);
+		aw = _getch();
+
+		if (aw == 49)
+		{ 
+			system("cls");
+			printf("%s\n", solve);
+			printf("Benutze Worter : ");
+			printf("geben sie ein buchstaben ein!\n");
+
+			hangman(); // wiedergabe des hangmans
+
+			if (strcmp(solve, rate) == 0)
+			{
+				running = true;
+				break;
+			} // Vergleicht die wörter ( Gibt bescheid wenn beide gleich sind ) 
+
+			gets_s(inputU);
+
+			for (int r = 0; r < lange - 1; r++)
+			{
+				if (rate[r] == toupper(inputU[0])) { solve[r] = toupper(inputU[0]); } // vergleicht ein wort mit buchstaben
+				if (rate[r] != toupper(inputU[0])) { fail++; } // wenn kein buchstabe im wort vorhanden ist!;
+
+			}
+			if (fail == lange - 1) { k++; Beep(500, 500);}
+			fail = 0;
+
+			for (versu = 0; versu < lange - 1;)
+			{
+				versuche[versu] = toupper(inputU[0]);
+				break;
+			}
+			//versuche[versu++] = '\0';
+			versu++;
+		} // Wort eingabe || if (aw == 49)
+
+		if (aw == 50)
+		{
+			printf("%s\n", solve);
+			printf("geben sie ihr wort ein!\n");
+			hangman();
+			fgets(inputU, 40, stdin);
+
+			for (i = 0; i < lange - 1; i++)
+			{
+				temp[i] = toupper(inputU[i]);
+			} 
+			temp[i] = '\0';
+
+			if (strcmp(rate, temp) == 0) {
+				win = 1;
+				running = true;
+				break;
+			} // Vergleicht das wort ob es richtig ist
+			if (strcmp(rate, temp) != 0) {
+				k = 8;
+				hangman();
+				Beep(750, 500);
+				win = 0;
+				running = true;
+				break;
+			} // Vergleicht das wort ob es Falsch ist
+		}
+	}
 }
 int main()
 {
+	PlaySound("musik.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+
 	wortEingabe();
-	while (!running)
-	{
-		system("cls");
-		printf("%s\n", solve);
-		printf("geben sie ein buchstaben ein!\n");
-		hangman();
-		if (strcmp(solve, rate) == 0)
-		{
-			running = true;
-			break;
-		}
-		gets_s(inputU);
-
-		for (int r = 0; r < lange - 1; r++)
-		{
-			if (rate[r] == toupper(inputU[0]))
-			{
-				solve[r] = toupper(inputU[0]);
-			}
-			
-		}
-		
-	} 
-	running = false;
-
-
-
+	game();
+	
 	printf("Das wort ist %s mit einer lange von %d\n", rate, lange - 1);
-	printf("%s", solve);
+	printf("%s", rate);
 	Sleep(1000);
-	while (!running)
-	{
-		system("cls");
-		for (int i = 0; i < 10; i++)
-		{
-			printf("%s\n", man[k][i]);
-		} // Hangman Draw
-		_getch();
-		k++;
-		if (k == 9) { exit(-1); }
-	}
+
 	getchar();
 	return 0;
 }
