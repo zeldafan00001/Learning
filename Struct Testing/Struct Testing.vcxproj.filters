@@ -19,9 +19,4 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Quelle.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-  </ItemGroup>
 </Project>

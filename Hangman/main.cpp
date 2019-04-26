@@ -7,6 +7,7 @@
 // Rechtsklick auf 3D Wurfel > Eigenschaften > Linker > Eingabe > zusätzliche Abhängikeit > Bearbeiten > winmm.lib Einfügen
 //[z][y][x]
 bool running = false;
+HANDLE hConsole;
 char SN[1][15];
 char man[11][10][15] =
 { {"             ","             ","             ","             ","             ","             ","             ","#############"},
@@ -35,8 +36,7 @@ void name()
 		printf("Bitte geben sie den name des [%d] Spielers ein!\n>> ", n + 1);
 		fgets(SN[n], 15, stdin); printf("\n");
 	} // Namen eingabe
-}
-
+} // void name() ende
 void hangman()
 {
 	for (int i = 0; i < 10; i++)
@@ -44,8 +44,7 @@ void hangman()
 		printf("%s\n", man[k][i]);
 	} // Hangman Draw
 	//if (k == 9) { exit(-1); }
-}
-
+} //void hangman() ende
 void wortEingabe()
 {
 	system("cls");
@@ -60,7 +59,6 @@ void wortEingabe()
 	}
 	solve[i] = '\0';
 	rate[i] = '\0';
-	
 }
 
 void game()
@@ -70,7 +68,8 @@ void game()
 	{
 		system("cls");
 		printf("Wollen sie ein Wort oder ein Buchstaben eingeben? \n[ 1 Buchstabe | 2 Wort ]\n");
-		printf("%s\n", solve);
+		printf("%s\n\n", solve);
+		hangman();
 		aw = _getch();
 
 		if (aw == 49)
@@ -81,12 +80,6 @@ void game()
 			printf("geben sie ein buchstaben ein!\n");
 
 			hangman(); // wiedergabe des hangmans
-
-			if (strcmp(solve, rate) == 0)
-			{
-				running = true;
-				break;
-			} // Vergleicht die wörter ( Gibt bescheid wenn beide gleich sind ) 
 
 			gets_s(inputU);
 
@@ -105,6 +98,13 @@ void game()
 				break;
 			}
 			//versuche[versu++] = '\0';
+			if (strcmp(solve, rate) == 0)
+			{
+				running = true;
+				break;
+			} // Vergleicht die wörter ( Gibt bescheid wenn beide gleich sind ) 
+			  
+			
 			versu++;
 		} // Wort eingabe || if (aw == 49)
 
@@ -139,7 +139,9 @@ void game()
 }
 int main()
 {
-	PlaySound("musik.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+	//PlaySound("musik.wav", NULL, SND_FILENAME | SND_LOOP | SND_ASYNC);
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	system("mode 50, 20");
 
 	wortEingabe();
 	game();

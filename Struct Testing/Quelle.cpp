@@ -1,45 +1,37 @@
 #include <iostream>
-#include "Quelle.h"
 using namespace std;
-struct Spieler
+
+class Tester1
 {
-	int level;
-	int cordsY[10];
-	int cordsX[10];
-};
-struct Bot
-{
-	int level;
-	int cordsY[10];
-	int cordsX[10];
+private:
+	int hohe;
+	int lange;
+public:
+	void rechner(int hohe,int lange);
+	int area() { return hohe * lange; }
 };
 
-void structuren(Spieler Player, Spieler Gegner)
+void Tester1::rechner(int x, int y)
 {
-	for (int s = 0; s < 9; s++)
-	{
-		Player.cordsY[s] = s + 2;
-		Player.cordsX[s] = s + 5;
-		Gegner.cordsX[s] = s + 7;
-		Gegner.cordsY[s] = s + 3;
-	}
+	hohe = x;
+	lange = y;
 }
 
 int main()
 {
+	int h, l;
+	Tester1 test;
+	
+	cout << "Bitte geben sie die Hoehe ein!" << endl << ">> ";
+	cin >> h;
+	cout << "Bitte geben sie die Laenge ein!" << endl << ">> ";
+	cin >> l;
 
-	cout << endl << "Player.CordsY" << endl;
-	for (int s = 0; s < 9; s++)
-	{
-		cout << "X: " << Player.cordsX[s] << " | Y: " << Player.cordsY[s] << endl;
-	}
+	test.rechner(h, l);
 
-	cout << endl << "Gegner.CordsY" << endl;
-	for (int s = 0; s < 9; s++)
-	{
-		cout << "X: " << Gegner.cordsX[s] << " | Y: " << Gegner.cordsY[s] << endl;
-	}
+	cout << "Die Area ist : " << test.area() << endl;
 
-	getchar();
+	system("pause");
 	return 0;
+
 }

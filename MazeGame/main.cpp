@@ -7,17 +7,17 @@ using namespace std;
 HANDLE  hConsole;
 
 //   map[y][x]
-char map[13][30] = { "#############################",
-					"#   #                      X#",
-					"# P    #X      #R#X         #",
-					"#   #                      X#",
-					"#########################   #",
-					"#                           #",
-					"#                           #",
-					"#                           #",
-					"#                           #",
-					"#                           #",
-					"# Z                         #",
+char map[13][30] = {"#############################", //0
+					"#   #                      X#", //1
+					"# P    #X      #R#X         #", //2
+					"#   #                      X#", //3
+					"#########################   #", //4
+					"#                   #RRR#   #", //5
+					"#                   #X      #", //6
+					"#                   #      X#", //7
+					"#                   #X      #", //8
+					"#                   #      X#", //9
+					"# Z                 #X      #", //10
 					"#                           #",
 					"#############################" };
 // Spieler
@@ -28,7 +28,6 @@ int cordY[10], tempY;
 int cordX[10], tempX;
 int s;
 int direction[10];
-
 bool running = false;
 int punkte = 500;
 bool winb = false;
@@ -181,18 +180,29 @@ void Input()
 }
 void setEnemCords()
 {
+	// 1 HOCH | 2 RUNTER | 3 RECHTS | 4 LINKS
 	cordY[0] = 1; cordX[0] = 27;
 	cordY[1] = 2; cordX[1] = 8;
 	cordY[2] = 3; cordX[2] = 27;
 	cordY[3] = 2; cordX[3] = 18;
+	cordY[4] = 6; cordX[4] = 21;
+	cordY[5] = 7; cordX[5] = 27;
+	cordY[6] = 8; cordX[6] = 21;
+	cordY[7] = 9; cordX[7] = 27;
+	cordY[8] = 10; cordX[8] = 21;
 	direction[0] = 4;
 	direction[1] = 3;
 	direction[2] = 4;
 	direction[3] = 3;
+	direction[4] = 3;
+	direction[5] = 4;
+	direction[6] = 3;
+	direction[7] = 4;
+	direction[8] = 3;
 }
 void enemMove()
 {
-	for (s = 0; s < 5; s++)
+	for (s = 0; s < 9; s++)
 	{
 		tempY = cordY[s];	tempX = cordX[s];
 		if (direction[s] == 1) // Hoch laufen

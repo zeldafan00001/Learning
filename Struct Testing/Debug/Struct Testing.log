@@ -1,3 +1,2 @@
 ﻿  Quelle.cpp
-C:\Users\Kevin Schmitz\Documents\GitHub x Visual CPP\Learning\Struct Testing\Quelle.cpp(34): error C2065: "Player": nichtdeklarierter Bezeichner
-C:\Users\Kevin Schmitz\Documents\GitHub x Visual CPP\Learning\Struct Testing\Quelle.cpp(40): error C2065: "Gegner": nichtdeklarierter Bezeichner
+  Struct Testing.vcxproj -> C:\Users\Kevin Schmitz\Documents\GitHub x Visual CPP\Learning\Debug\Struct Testing.exe
